@@ -1,0 +1,7 @@
+infrastructure/
+scripts/
+node_modules/
+dist/
+.gitignore
+package-lock.json
+docker-compose.yaml

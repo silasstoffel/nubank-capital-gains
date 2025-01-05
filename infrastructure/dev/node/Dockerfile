@@ -2,7 +2,9 @@ FROM node:22.12.0
 
 WORKDIR /usr/app
 
-COPY . .
+COPY package.json package-lock.json ./
+COPY jest.config.js tsconfig.json .nvmrc ./
+COPY src/ ./src
 
 RUN npm install
 
