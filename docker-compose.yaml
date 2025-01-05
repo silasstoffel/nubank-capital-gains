@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+
+    api:
+        build:
+            context: .
+            dockerfile: ./infrastructure/dev/node/Dockerfile
+        container_name: 'capital-gains-app'
+        volumes:
+            - .:/usr/app

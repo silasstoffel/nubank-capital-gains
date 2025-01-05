@@ -1,0 +1,30 @@
+{
+  "name": "capital-gains",
+  "version": "0.1.0",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start:dev": "tsc --watch",
+    "test": "jest --coverage=false",
+    "test:coverage": "jest --coverage=true"
+  },
+  "bin": {
+    "capital-gains": "dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.4",
+    "globals": "^15.14.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
