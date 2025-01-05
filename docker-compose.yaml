@@ -9,6 +9,7 @@ services:
         container_name: 'capital-gains-app'
         volumes:
             - ./src:/usr/app/src
+            - ./data:/usr/app/data
             - ./package.json:/usr/app/package.json
             - ./package-lock.json:/usr/app/package-lock.json
             - ./tsconfig.json:/usr/app/tsconfig.json

@@ -5,6 +5,7 @@ WORKDIR /usr/app
 COPY package.json package-lock.json ./
 COPY jest.config.js tsconfig.json .nvmrc ./
 COPY src/ ./src
+COPY data/ ./data
 
 RUN npm install
 

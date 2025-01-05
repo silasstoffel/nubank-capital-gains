@@ -9,28 +9,31 @@ import {
     VERSION,
     VERSION_OPTION
 } from './env'
+import { operationInputFromFileRedirect, operationInputFromTTY } from './adapters'
 
-export function main() {
-    const args = process.argv.slice(2)
+export async function main() {
+    let input = process.stdin.isTTY ?
+        operationInputFromTTY(process) :
+        await operationInputFromFileRedirect(process)
 
-    if (!args.length) {
+    if (!input) {
         console.error('No arguments provided.')
         process.exit(1)
     }
 
-    const option = args[0]
-    if ([HELP_OPTION, SHORT_HELP_OPTION].includes(option)) {
+    if ([HELP_OPTION, SHORT_HELP_OPTION].includes(input)) {
         printHelpOptions()
         process.exit(0)
     }
 
-    if ([VERSION_OPTION, SHORT_VERSION_OPTION].includes(option)) {
+    if ([VERSION_OPTION, SHORT_VERSION_OPTION].includes(input)) {
         printVersion()
         process.exit(0)
     }
 
-    const output = handleOperation(option)
+    const output = handleOperation(input)
     printResult(output)
+    process.exit(0)
 }
 
 function printVersion() {
