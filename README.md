@@ -21,12 +21,16 @@
 
 ## Setup
 
-Caso esteja usando docker existe um script facilitador que já roda o docker compose e abre terminal do container.
+O setup pode ser ser feito com uma dessas alternativas:
+
+#### 1 - Docker/docker compose com script facilitador
 
 ```bash
 ./scripts/shell.sh
+```
+#### 2 - Docker/docker compose sem o script facilitador
 
-# or manually configure with docker
+```bash
 docker-compose up -d
 
 # Access container
@@ -34,6 +38,7 @@ docker exec -it capital-gains-app bash
 
 # install dependencies
 npm install
+
 # building the app
 npm run build
 
@@ -44,7 +49,9 @@ chmod +x dist/app.js
 npm link
 ```
 
-Caso queira fazer o processo todo manual, é necessario primeiramente instalar o [NodeJS 22.12](https://nodejs.org/en/) manualmente ou caso tenha nvm instalado, basta executar o `nvm install`. Na raíz do projeto. Logo em sequencia, siga esses passos:
+#### 3 - Manual
+
+Instalar o [NodeJS 22.12](https://nodejs.org/en/) ou caso tenha [nvm](https://github.com/nvm-sh/nvm) instalado, basta executar o `nvm install` na raíz do projeto, em sequencia, siga esses passos:
 
 
 ```bash
