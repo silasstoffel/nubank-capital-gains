@@ -92,6 +92,9 @@ capital-gains -h
 # version
 capital-gains -v
 
-# processing capital gains
+# processing capital gains using string parameter
 capital-gains '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},{"operation":"sell", "unit-cost":20.00, "quantity": 5000}]'
+
+# processing capital gains using file redirect
+capital-gains < ./data/case7.json
 ```
