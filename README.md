@@ -28,6 +28,12 @@ O setup pode ser ser feito com uma dessas alternativas:
 ```bash
 ./scripts/shell.sh
 ```
+Caso precise, conceda permissão de execução.
+
+```bash
+chmod +x ./scripts/shell.sh
+```
+
 #### 2 - Docker/docker compose sem o script facilitador
 
 ```bash
@@ -45,7 +51,7 @@ npm run build
 # adding permissions to execute as binary
 chmod +x dist/app.js
 
-# create to allow capital-gains execute as binary
+# Allowing capital-gains execute as binary
 npm link
 ```
 
@@ -77,7 +83,7 @@ npm run test
 # without coverage
 npm run test:coverage
 ```
-O relatório decobertura de código é apresentado no terminal e também uma diretório dist será criado com diversos formatos
+O relatório de cobertura de código é apresentado no terminal e também um diretório `dist` será criado com diversos formatos
 
 
 ## Running the App
@@ -85,7 +91,6 @@ O relatório decobertura de código é apresentado no terminal e também uma dir
 Principais comandos:
 
 ```bash
-
 # help
 capital-gains -h
 
@@ -98,3 +103,12 @@ capital-gains '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},{"oper
 # processing capital gains using file redirect
 capital-gains < ./data/case7.json
 ```
+
+**Importante**: Ao executar `capital-gains` passando como argumento a linha a ser processada, informe o json entre aspas simples. Exemplo: `capital-gains 'json content here'`. A execução via input redirect não precisa das aspas.
+
+## Tech Decisions
+
+1. A linguagem escolhida para o projeto é Javascript com superset typescript rodando na runtime NodeJS. Vale ressaltar que typescript nesse caso foi escolhido para melhorar a dev experience com a proposta de fornecer uma experiência de linguagem estaticamente tipada.
+2. Paradigma funcional com objetivo de ter proposta mais simples em relação aos demais paradigmas.
+3. Apesar de ser domínio simples, o app foi pensado para ter um domínio específico do capital gains e não ser acomplado a CLI ou qualquer outro meio de entrada. Aqui foi pensado em adapters que permite suportar evoluções para http por exemplo apenas escrevendo um adapter com input do domínio do capital gains.
+4. As única depencias e/ou libs de terceiros usadas foram o Jest (ferramenta de testes) e o TypeScript. Ambas soluções são dependências de desenvolvimento e não afetam o core da aplicação e também podem ser facilmente desconsideradas no pipeline de build para produção (não implementado nesta versão).
