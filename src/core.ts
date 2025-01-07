@@ -1,4 +1,3 @@
-import process from 'process'
 import { MAX_AMOUNT_WITHOUT_TAX, TAX_PERCENT } from './env'
 import {
     OperationType,
@@ -16,14 +15,14 @@ export function handleOperation(input: string): TransactionOutput[][] {
 
 function parseInput(input: string): TransactionInput[][] {
     if (typeof input !== 'string') {
-        process.exit(1)
+        return []
     }
 
     const strJson = input.replace(/(\r\n|\n|\r)/g, '').replace(/"unit-cost"/g, '"unitCost"')
 
     const lines = strJson.match(/\[.*?\]/g)
     if (!lines) {
-        process.exit(1)
+        return []
     }
 
     return lines.map(
@@ -67,8 +66,10 @@ function handleLine(line: TransactionInput[]): TransactionOutput[] {
 function calculateMediumPrice(tradeSummary: TradeSummary, transaction: TransactionInput): number {
     const currentQuantity = tradeSummary.quantity
     const currentMediumPrice = tradeSummary.mediumPrice
+    const transactionTotal = transaction.quantity * transaction.unitCost
+    const currentTotal = currentQuantity * currentMediumPrice
 
-    return ((currentQuantity * currentMediumPrice) + (transaction.quantity * transaction.unitCost)) / (currentQuantity + transaction.quantity)
+    return round((currentTotal + transactionTotal) / (currentQuantity + transaction.quantity))
 }
 
 function handleBuyOperation(tradeSummary: TradeSummary, transaction: TransactionInput): void {
@@ -123,4 +124,8 @@ export function calculateTax(tradeSummary: TradeSummary, transaction: Transactio
     }
 
     return gain * TAX_PERCENT
+}
+
+function round(value: number): number {
+    return Math.round(value * 100) / 100;
 }

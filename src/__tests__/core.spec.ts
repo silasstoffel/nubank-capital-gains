@@ -6,8 +6,16 @@ import { scenarios } from './scenarios'
 describe('Core', () => {
 
  describe('handleOperation', () => {
-    test.each(scenarios)('Handle operation: %s', (_, input:string, expected) => {
+    test.each(scenarios)('Handle operation: %s', (_, input: string, expected) => {
         expect(handleOperation(input)).toEqual(expected)
+    })
+
+    it('Should not process empty input', () => {
+        expect(handleOperation(null as unknown as string)).toEqual([])
+    })
+
+    it('Should return an empty line when items is empty', () => {
+        expect(handleOperation('[]')).toEqual([[]])
     })
  })
 
