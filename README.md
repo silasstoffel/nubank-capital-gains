@@ -111,4 +111,35 @@ capital-gains < ./data/case7.json
 1. A linguagem escolhida para o projeto é Javascript com superset typescript rodando na runtime NodeJS. Vale ressaltar que typescript nesse caso foi escolhido para melhorar a dev experience com a proposta de fornecer uma experiência de linguagem estaticamente tipada.
 2. Paradigma funcional com objetivo de ter proposta mais simples em relação aos demais paradigmas.
 3. Apesar de ser domínio simples, o app foi pensado para ter um domínio específico do capital gains e não ser acomplado a CLI ou qualquer outro meio de entrada. Aqui foi pensado em adapters que permite suportar evoluções para http por exemplo apenas escrevendo um adapter com input do domínio do capital gains.
-4. As única depencias e/ou libs de terceiros usadas foram o Jest (ferramenta de testes) e o TypeScript. Ambas soluções são dependências de desenvolvimento e não afetam o core da aplicação e também podem ser facilmente desconsideradas no pipeline de build para produção (não implementado nesta versão).
+4. As únicas depências e/ou libs de terceiros usadas foram o Jest (ferramenta de testes) e o TypeScript. Ambas soluções são dependências de desenvolvimento e não afetam o core da aplicação e também podem ser facilmente desconsideradas em pipeline de build para produção (não implementado nesta versão).
+5. O objetivo não foi conseguir 100% de cobertura e sim priorizar os testes de [domínio](./src/core.ts) que garantem as regras de negócios
+6. Nesta versão não foi comtemplado containerização para produção com princípios de segurança e permissões (non-root user), imagens otimizadas entre outras práticas.
+
+**Estrutura do Projeto:**
+```
+Capital Gains
+├── data            // Artefatos de exemplo
+├── infrastructure  // Infraestrutura do projeto (container)
+├── scripts         // Scritps para auxiliar builds ou utilitários
+├── src             // Código fonte do app
+    ├── app.ts      // Entrypoint do app
+```
+
+## Troubleshooting
+
+##### 1. Ao rodar o app o programa não é reconhecido.
+
+Há mais uma solução para esse caso, mas esta pode ser a ordem:
+
+```bash
+# 1 - Excutar o npm link
+npm link
+capital-gains 'json here'
+
+# 2 - Executar o binário com o gerenciador de dependencia do node
+npx capital-gains 'json here'
+
+# 3 - Executar diretamente com node
+node dist/app.js 'json here'
+```
+
